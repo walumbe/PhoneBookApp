@@ -32,4 +32,17 @@ To create all the nessesary tables and columns, run the following
 php artisan migrate
 ```
 
+### Run Application
+Run
+````
+php artisan serve
+```
+Type this on your browser
+
+````
+http://localhost:8000/
+
+```
+
+
 
