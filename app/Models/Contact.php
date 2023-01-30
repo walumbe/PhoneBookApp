@@ -13,8 +13,6 @@ class Contact extends Model
         if($filters['lastname'] ?? false) {
             $query->where('lastname', 'like', '%' . request('lastname'). '%');
         }
-
-        
         if($filters['search'] ?? false) {
             $query->where('lastname', 'like', '%' . request('search') . '%');
         }

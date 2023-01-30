@@ -58,8 +58,6 @@
 
     
       </form>
-        @csrf
-        <div
     </x-card>
   </x-layout>
   
