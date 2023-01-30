@@ -9,19 +9,22 @@ class ContactController extends Controller
 {
     // Show all Contacts
     public function index(){
+        return view('contacts.index', [
+            'contacts' => Contact::latest()->filter(request(['lastname', 'search']))->paginate(6)
+        ]);
 
     }
 
     // show single contact
     public function show(Contact $contact){
-        return view('show', [
-            'contacts' => Contact::latest()->filter(request(['lastname', 'search']))->paginate(6)
+        return view('contacts.show', [
+            'contact' => $contact
         ]);
     }
 
     // show create form
     public function create(){
-        return view('create');
+        return view('contacts.create');
     }
 
     // Store contact data
@@ -30,12 +33,32 @@ class ContactController extends Controller
             'firstname' => 'required',
             'lastname' => 'required',
             'phone' => 'required',
-            'email' => 'required',
+            'email' => ['required', 'email'],
         ]);
 
         Contact::create($formFields);
 
         return redirect('/')->with('message', 'Contact created successfully');
+    }
+
+    // show edit form
+    public function edit(Contact $contact){
+        return view('contacts.edit', ['contact' => $contact]);
+    }
+
+    // Update Contact data
+
+    public function update(Request $request, Contact $contact){
+        $formFields = $request->validate([
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'phone' => 'required',
+            'email' => ['required', 'email'],
+        ]);
+
+        $contact->update($formFields);
+
+        return back()->with('message', 'Contact Updated Successfully');
     }
 
     // Delete Contact
