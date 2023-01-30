@@ -18,16 +18,22 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [ContactController::class, 'index']);
 
 // Show create form
-Route::get('/create', [ContactController::class, 'create']);
+Route::get('/contacts/create', [ContactController::class, 'create']);
 
 // Store Contact Data
-Route::post('/', [ContactController::class, 'store']);
+Route::post('/contacts', [ContactController::class, 'store']);
 
 // Show edit Form
-Route::get('/{contact}/edit', [ContactController::class, 'edit']);
+Route::get('/contacts/{contact}/edit', [ContactController::class, 'edit']);
 
 // Update Contact
-Route::put('/{contact}', [ContactController::class, 'update']);
+Route::put('/contacts/{contact}', [ContactController::class, 'update']);
 
 // Delete Contact
-Route::put('/{contact}', [ContactController::class, 'destroy']);
+Route::delete('/contacts/{contact}', [ContactController::class, 'destroy']);
+
+// Manage Contacts
+Route::get('/contacts/manage', [ContactController::class, 'manage']);
+
+// single contact
+Route::get('/contacts/{contact}', [ContactController::class, 'show']);
